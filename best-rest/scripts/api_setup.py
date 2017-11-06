@@ -74,30 +74,8 @@ def stop_capture(capture_name):
     try:
         run_command("echo 'ciscolive' | sudo -S sudo pkill tcpdump > /dev/null")
         time.sleep(1)
-        run_command("mv -f " + capture_name + " Cisco-Live-Workshop/best-rest/packet-captures/")
-        os.chdir("Cisco-Live-Workshop")
-        run_command("git pull > /dev/null 2>&1")
-        run_command("git pull > /dev/null 2>&1")
-        run_command("git add *")
-        run_command("git commit -m \"Cisco Live commit\" > /dev/null 2>&1")
-        run_command("git push origin master > /dev/null 2>&1")
-        os.chdir("..")
-        run_command("rm -rf *.pcap")
-        run_command("echo 'ciscolive' | sudo -S sudo pkill tcpdump > /dev/null")
-    except Exception as e:
-        print "\nAn Exception was raised: ", type(e), e, "\n"
-        sys.exit()
-
-# Function to push Cisco-Live-Workshop to GitHub
-def push_capture():
-    try:
-        os.chdir("Cisco-Live-Workshop")
-        run_command("git pull > /dev/null 2>&1")
-        run_command("git pull > /dev/null 2>&1")
-        run_command("git add *")
-        run_command("git commit -m \"Cisco Live commit\" > /dev/null 2>&1")
-        run_command("git push origin master > /dev/null 2>&1")
-        os.chdir("..")
+        run_command("mkdir -p ~/packet-captures")
+        run_command("mv -f " + capture_name + " ~/packet-captures/")
     except Exception as e:
         print "\nAn Exception was raised: ", type(e), e, "\n"
         sys.exit()
